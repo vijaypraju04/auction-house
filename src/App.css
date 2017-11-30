@@ -8,8 +8,8 @@
 }
 
 .App-header {
-  background-color: #222;
-  height: 150px;
+  background-color: blue;
+  height: 200px;
   padding: 20px;
   color: white;
 }
@@ -20,6 +20,27 @@
 
 .App-intro {
   font-size: large;
+}
+
+.Auction-Listing {
+  width: 100px;
+  height: 200px;
+  border: 1px solid blue;
+  margin: 5px;
+  float: left;
+}
+.Bid-Window {
+  width: 100px;
+  height: 200px;
+  border: 1px solid blue;
+  margin: 5px;
+  float: right;
+}
+.Search {
+  float: left;
+}
+.Auction-Detail {
+  float: center;
 }
 
 @keyframes App-logo-spin {
