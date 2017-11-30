@@ -3,10 +3,11 @@ import './App.css';
 import AuctionSearchBar from './AuctionSearchBar.js';
 import Auctions from './Auctions.js';
 
-const AuctionList = ({auctions}) => {
-  const auctionListItems = auctions.map((auction) => {
+const AuctionList = (props) => {
+  const auctionListItems = props.auctions.map((auction) => {
     return (
       <Auctions
+        onAuctionSelect={props.onAuctionSelect}
         key={auction.id}
         auction={auction}
       />

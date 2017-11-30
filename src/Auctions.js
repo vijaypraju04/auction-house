@@ -1,8 +1,10 @@
 import React from 'react'
 
-const Auctions = ({auction}) => {
+const Auctions = ({auction, onAuctionSelect}) => {
   return (
-      <li>{auction.description}</li>
+    <div onClick={() => onAuctionSelect(auction)}>
+        {auction.title}
+        </div>
   )
 }
 

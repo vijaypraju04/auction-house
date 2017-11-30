@@ -1,6 +1,6 @@
 import React from 'react';
 
-const BidWindow = () => {
+const BidWindow = ({bids}) => {
   return (
     <div className='Bid-Window'>
       Bids go Here

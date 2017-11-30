@@ -39,7 +39,7 @@ fetchAuctions(){
 
 filterResults = () => {
    let newList = this.state.auctions.filter(auction => {
-     if(auction.description.toLowerCase().includes(this.state.searchTerm.toLowerCase())){
+     if(auction.title.toLowerCase().includes(this.state.searchTerm.toLowerCase())){
        return auction
      }
    })
@@ -61,7 +61,6 @@ filterResults = () => {
           onAuctionSelect={selectedAuction => this.setState({selectedAuction})}/>
         <AuctionDetail
           auction={this.state.selectedAuction} />
-        <BidWindow />
       </div>
     );
   }
