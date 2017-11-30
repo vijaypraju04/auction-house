@@ -7,14 +7,55 @@ import BidWindow from './BidWindow.js';
 import AuctionSearchBar from './AuctionSearchBar.js';
 import AuctionDetail from './AuctionDetail.js';
 
+
 class App extends Component {
+// const API_LINK = 'https://auction-back-end.herokuapp.com/api/v1/auctions'
+
+constructor(){
+  super()
+  this.state = {
+    auctions: [],
+    searchTerm: ''
+  }
+}
+
+componentDidMount(){
+  this.fetchAuctions()
+}
+
+fetchAuctions(){
+    fetch('https://auction-back-end.herokuapp.com/api/v1/auctions')
+    .then(res => res.json())
+    .then(res => {
+      const auctions = res;
+      this.setState({
+        auctions: res
+      });
+      console.log(auctions);
+    });
+}
+
+filterResults = () => {
+   let newList = this.state.auctions.filter(auction => {
+     if(auction.description.toLowerCase().includes(this.state.searchTerm.toLowerCase())){
+       return auction
+     }
+   })
+    return newList
+ }
+
   render() {
     return (
       <div>
         <Header />
-        <AuctionSearchBar />
+        <AuctionSearchBar
+        searchTerm={this.state.searchTerm}
+        handleSearchTerm={searchTerm => this.setState({searchTerm})}
+        />
+        {this.state.searchTerm}
 
-        <AuctionList />
+        <AuctionList
+          auctions={this.filterResults()}/>
         <AuctionDetail />
         <BidWindow />
       </div>
