@@ -15,7 +15,8 @@ constructor(){
   super()
   this.state = {
     auctions: [],
-    searchTerm: ''
+    searchTerm: '',
+    selectedAuction: null
   }
 }
 
@@ -29,7 +30,8 @@ fetchAuctions(){
     .then(res => {
       const auctions = res;
       this.setState({
-        auctions: res
+        auctions: res,
+        selectedAuction: res[0]
       });
       console.log(auctions);
     });
@@ -55,8 +57,10 @@ filterResults = () => {
         {this.state.searchTerm}
 
         <AuctionList
-          auctions={this.filterResults()}/>
-        <AuctionDetail />
+          auctions={this.filterResults()}
+          onAuctionSelect={selectedAuction => this.setState({selectedAuction})}/>
+        <AuctionDetail
+          auction={this.state.selectedAuction} />
         <BidWindow />
       </div>
     );

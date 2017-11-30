@@ -1,9 +1,13 @@
 import React from 'react';
 
-const AuctionDetail = () => {
+const AuctionDetail = ({auction}) => {
+  if(!auction) {
+    return <div>Loading.......</div>;
+  }
   return(
-    <div className='Auction-Detail'>
-    Get Fucked
+    <div>
+      <h1>{auction.title}</h1>
+      <p>{auction.description}</p>
     </div>
   )
 }
