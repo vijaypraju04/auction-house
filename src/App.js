@@ -16,7 +16,8 @@ constructor(){
   this.state = {
     auctions: [],
     searchTerm: '',
-    selectedAuction: null
+    selectedAuction: null,
+    newAuction: {}
   }
 }
 

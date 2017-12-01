@@ -1,5 +1,6 @@
 import React from 'react';
 import BidWindow from './BidWindow.js'
+import NewAuctionForm from './NewAuctionForm.js';
 
 const AuctionDetail = ({auction}) => {
   if(!auction) {
@@ -10,6 +11,8 @@ const AuctionDetail = ({auction}) => {
     <div>
       <h1>{auction.title}</h1>
       <p>{auction.description}</p>
+
+      <NewAuctionForm />
 
     </div>
     <BidWindow
