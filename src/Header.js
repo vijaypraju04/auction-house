@@ -15,7 +15,7 @@ const Header = () => {
           </h4>
       </header>
       <p className="App-intro">
-        To get started, edit <code>Get Fucked Kenneth</code> and save to reload.
+        To get started, edit <code>REALITY</code> and save to reload.
       </p>
     </div>
   )
