@@ -45,7 +45,7 @@ fetchAuctions = () => {
 
 fetchUser = (userData) => {
   console.log("fetch user", userData)
-  fetch('http://localhost:3000/api/v1/login', {
+  fetch('https://auction-back-end.herokuapp.com/api/v1/login', {
     method: 'POST',
     headers: {
        Accepts: 'application/json, text/plain',
