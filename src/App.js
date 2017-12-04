@@ -8,6 +8,7 @@ import AuctionSearchBar from './AuctionSearchBar.js';
 import AuctionDetail from './AuctionDetail.js';
 import NewAuctionForm from './NewAuctionForm.js';
 import NewBidForm from './NewBidForm.js'
+import Login from './login.js'
 
 
 class App extends Component {
@@ -29,7 +30,7 @@ componentDidMount(){
   this.fetchAuctions()
 }
 
-fetchAuctions(){
+fetchAuctions = () => {
     fetch('https://auction-back-end.herokuapp.com/api/v1/auctions')
     .then(res => res.json())
     .then(res => {
@@ -40,6 +41,20 @@ fetchAuctions(){
       });
       console.log(auctions);
     });
+}
+
+fetchUser = (userData) => {
+  console.log("fetch user", userData)
+  fetch('http://localhost:3000/api/v1/login', {
+    method: 'POST',
+    headers: {
+       Accepts: 'application/json, text/plain',
+       'Content-Type': 'application/json'
+      },
+    body: JSON.stringify(userData)
+  })
+  .then(res => res.json())
+  .then(res => console.log("login complete", res))
 }
 
 updateAuctions= () => {
@@ -114,6 +129,7 @@ handleCreateBid = (bidInfo, auctionId) => {
   render() {
     return (
       <div>
+        <Login fetchUser={this.fetchUser} />
         <Header />
         <AuctionSearchBar
         searchTerm={this.state.searchTerm}
