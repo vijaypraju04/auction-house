@@ -7,6 +7,7 @@ import AuctionList from './AuctionList.js';
 import AuctionSearchBar from './AuctionSearchBar.js';
 import AuctionDetail from './AuctionDetail.js';
 import NewAuctionForm from './NewAuctionForm.js';
+import NewBidForm from './NewBidForm.js'
 
 
 class App extends Component {
@@ -14,12 +15,14 @@ class App extends Component {
 
 constructor(){
   super()
+
   this.state = {
     auctions: [],
     searchTerm: '',
     selectedAuction: null,
     newAuction: {}
   }
+  // this.updateAuctions = this.updateAuctions.bind(this)
 }
 
 componentDidMount(){
@@ -36,6 +39,19 @@ fetchAuctions(){
         selectedAuction: res[0]
       });
       console.log(auctions);
+    });
+}
+
+updateAuctions= () => {
+    fetch('https://auction-back-end.herokuapp.com/api/v1/auctions')
+    .then(res => res.json())
+    .then(res => {
+      const stateSelected = this.state.selectedAuction;
+      const updatedSelected = res.filter(selected => selected.id === stateSelected.id)
+      console.log(updatedSelected[0])
+      this.setState({
+        selectedAuction: updatedSelected[0]
+      });
     });
 }
 
@@ -60,6 +76,26 @@ filterResults = () => {
   // .catch(res => res.json());
 }
 
+postBid = (data, auctionId) => {
+  console.log(auctionId)
+  fetch(`https://auction-back-end.herokuapp.com/api/v1/bids`, {
+    method: 'POST',
+    headers: {
+      Accepts: 'application/json, text/plain',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(
+      {
+      amount: data,
+      user_id: 3,
+      auction_id: auctionId
+  }
+    )
+  }).then(()=> this.updateAuctions())
+}
+
+
+
 handleCreateAuction = auctionInfo => {
  console.log(auctionInfo);
  this.createAuction(auctionInfo)
@@ -67,6 +103,13 @@ handleCreateAuction = auctionInfo => {
  //   console.log('res', res);
  // });
 };
+
+handleCreateBid = (bidInfo, auctionId) => {
+  this.postBid(bidInfo, auctionId);
+
+}
+
+
 
   render() {
     return (
@@ -80,11 +123,12 @@ handleCreateAuction = auctionInfo => {
 
         <AuctionList
           auctions={this.filterResults()}
-          onAuctionSelect={selectedAuction => this.setState({selectedAuction})
-                                              }
+          onAuctionSelect={selectedAuction => this.setState({selectedAuction})}
           />
         <AuctionDetail
           auction={this.state.selectedAuction}
+          handleCreateBid={this.handleCreateBid}
+          grabAuctionId={this.grabAuctionId}
           />
         <NewAuctionForm
           handleCreateAuction={this.handleCreateAuction}/>

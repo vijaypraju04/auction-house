@@ -10,7 +10,7 @@ const BidWindow = ({bids}) => {
   })
   return (
     <div className='Bid-Window'>
-      Bids go Here
+      Recent Bids
       {bidList}
     </div>
   )
