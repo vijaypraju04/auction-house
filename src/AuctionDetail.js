@@ -2,7 +2,7 @@ import React from 'react';
 import BidWindow from './BidWindow.js'
 import NewAuctionForm from './NewAuctionForm.js';
 
-const AuctionDetail = ({auction}) => {
+const AuctionDetail = ({auction, onSubmit}) => {
   if(!auction) {
     return <div>Loading.......</div>;
   }
@@ -12,7 +12,8 @@ const AuctionDetail = ({auction}) => {
       <h1>{auction.title}</h1>
       <p>{auction.description}</p>
 
-      <NewAuctionForm />
+      
+
 
     </div>
     <BidWindow

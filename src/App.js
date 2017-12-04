@@ -6,6 +6,7 @@ import AuctionList from './AuctionList.js';
 // import BidWindow from './BidWindow.js';
 import AuctionSearchBar from './AuctionSearchBar.js';
 import AuctionDetail from './AuctionDetail.js';
+import NewAuctionForm from './NewAuctionForm.js';
 
 
 class App extends Component {
@@ -46,6 +47,26 @@ filterResults = () => {
    })
     return newList
  }
+ createAuction = data => {
+  fetch(`https://auction-back-end.herokuapp.com/api/v1/auctions`, {
+    method: 'POST',
+    headers: {
+       Accepts: 'application/json, text/plain',
+
+                'Content-Type': 'application/json'
+      },
+    body: JSON.stringify(data)
+  })
+  // .catch(res => res.json());
+}
+
+handleCreateAuction = auctionInfo => {
+ console.log(auctionInfo);
+ this.createAuction(auctionInfo)
+ // .then(res => {
+ //   console.log('res', res);
+ // });
+};
 
   render() {
     return (
@@ -59,9 +80,14 @@ filterResults = () => {
 
         <AuctionList
           auctions={this.filterResults()}
-          onAuctionSelect={selectedAuction => this.setState({selectedAuction})}/>
+          onAuctionSelect={selectedAuction => this.setState({selectedAuction})
+                                              }
+          />
         <AuctionDetail
-          auction={this.state.selectedAuction} />
+          auction={this.state.selectedAuction}
+          />
+        <NewAuctionForm
+          handleCreateAuction={this.handleCreateAuction}/>
       </div>
     );
   }
