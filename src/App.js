@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Route} from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
 import Header from './Header.js';
@@ -9,10 +10,12 @@ import AuctionDetail from './AuctionDetail.js';
 import NewAuctionForm from './NewAuctionForm.js';
 import NewBidForm from './NewBidForm.js'
 import Login from './login.js'
+import Auth from './Auth.js';
+import Navbar from './Navbar.js'
 
 
 class App extends Component {
-// const API_LINK = 'https://auction-back-end.herokuapp.com/api/v1/auctions'
+// const API_LINK = 'http://localhost:3000//api/v1/auctions'
 
 constructor(){
   super()
@@ -21,31 +24,66 @@ constructor(){
     auctions: [],
     searchTerm: '',
     selectedAuction: null,
-    newAuction: {}
+    newAuction: {},
+    isLoggedIn: false,
+    auth: {
+        username: '',
+        user_id: ''
+      }
   }
   // this.updateAuctions = this.updateAuctions.bind(this)
 }
 
 componentDidMount(){
   this.fetchAuctions()
-}
+  const token = localStorage.getItem('token');
+    if (token) {
+      console.log('there is a token');
+      // make a request to the backend and find our user
+      Auth.currentUser()
+      .then(user => {
+        // debugger
+        const updatedState = { ...this.state.auth, user: user };
+        this.setState({ isLoggedIn: true, auth: updatedState });
+      });
+    }
+  }
+
+login = data => {
+    console.log('hi')
+    const updatedState = this.setState({ auth:{user: data}});
+    console.log(data);
+    localStorage.setItem('token', data.jwt);
+    console.log(this.state);
+    this.setState({ auth: {
+      username: data.username,
+      user_id: data.id
+
+    }});
+  };
+
+  logout = () => {
+      localStorage.removeItem('token');
+      this.setState({ auth: { user: {} } });
+    };
 
 fetchAuctions = () => {
-    fetch('https://auction-back-end.herokuapp.com/api/v1/auctions')
+    fetch('http://localhost:3000//api/v1/auctions')
     .then(res => res.json())
     .then(res => {
       const auctions = res;
       this.setState({
-        auctions: res,
-        selectedAuction: res[0]
+        auctions: res
+
       });
       console.log(auctions);
     });
+    console.log(this.state);
 }
 
 fetchUser = (userData) => {
   console.log("fetch user", userData)
-  fetch('https://auction-back-end.herokuapp.com/api/v1/login', {
+  fetch('http://localhost:3000//api/v1/login', {
     method: 'POST',
     headers: {
        Accepts: 'application/json, text/plain',
@@ -55,10 +93,11 @@ fetchUser = (userData) => {
   })
   .then(res => res.json())
   .then(res => console.log("login complete", res))
+
 }
 
 updateAuctions= () => {
-    fetch('https://auction-back-end.herokuapp.com/api/v1/auctions')
+    fetch('http://localhost:3000//api/v1/auctions')
     .then(res => res.json())
     .then(res => {
       const stateSelected = this.state.selectedAuction;
@@ -71,6 +110,7 @@ updateAuctions= () => {
 }
 
 filterResults = () => {
+  // console.log(this.state)
    let newList = this.state.auctions.filter(auction => {
      if(auction.title.toLowerCase().includes(this.state.searchTerm.toLowerCase())){
        return auction
@@ -79,7 +119,7 @@ filterResults = () => {
     return newList
  }
  createAuction = data => {
-  fetch(`https://auction-back-end.herokuapp.com/api/v1/auctions`, {
+  fetch(`http://localhost:3000//api/v1/auctions`, {
     method: 'POST',
     headers: {
        Accepts: 'application/json, text/plain',
@@ -93,7 +133,7 @@ filterResults = () => {
 
 postBid = (data, auctionId) => {
   console.log(auctionId)
-  fetch(`https://auction-back-end.herokuapp.com/api/v1/bids`, {
+  fetch(`http://localhost:3000//api/v1/bids`, {
     method: 'POST',
     headers: {
       Accepts: 'application/json, text/plain',
@@ -127,9 +167,28 @@ handleCreateBid = (bidInfo, auctionId) => {
 
 
   render() {
+    if(this.state.auctions.length < 1){
+      return <div> LOADING </div>
+    }
     return (
       <div>
-        <Login fetchUser={this.fetchUser} />
+
+      <Navbar
+            color="green"
+            title="Painterest"
+            description="our app"
+            icon="paint brush"
+            currentUser={this.state.auth}
+            handleLogout={this.logout}
+          />
+      <Route
+              exact
+              path="/login"
+              render={props => <Login {...props}
+              handleLogin={this.login}
+              fetchUser={this.fetchUser}/>}
+            />
+
         <Header />
         <AuctionSearchBar
         searchTerm={this.state.searchTerm}

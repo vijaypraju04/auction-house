@@ -5,7 +5,7 @@ import NewBidForm from './NewBidForm.js'
 
 const AuctionDetail = ({auction, onSubmit, handleCreateBid}) => {
   if(!auction) {
-    return <div>Loading.......</div>;
+    return <div><h1>Please Log In and Select an Auction in order to Proceed</h1></div>;
   }
   return(
     <div>
