@@ -27,8 +27,7 @@ constructor(){
     newAuction: {},
     isLoggedIn: false,
     auth: {
-        username: '',
-        user_id: ''
+      user: {}
       }
   }
   // this.updateAuctions = this.updateAuctions.bind(this)
@@ -206,7 +205,8 @@ handleCreateBid = (bidInfo, auctionId) => {
           grabAuctionId={this.grabAuctionId}
           />
         <NewAuctionForm
-          handleCreateAuction={this.handleCreateAuction}/>
+          handleCreateAuction={this.handleCreateAuction}
+          currentUser={this.state.auth}/>
       </div>
     );
   }

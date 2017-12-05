@@ -1,20 +1,26 @@
 import React from 'react';
 
 class NewAuctionForm extends React.Component {
-  constructor(){
-    super();
-
+  constructor(props){
+    super(props);
+    console.log(this.props.currentUser.user.id)
 
   this.state = {
     title: '',
     item: '',
     description: '',
-    value: ''
+    value: '',
+    creator_id: ''
   };
 }
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
+  componentDidMount = () => {
+    this.setState({
+      creator_id: this.props.currentUser.user.id
+    })
+  }
 
   // returnValue = (e) => {
   //   e.preventDefault()
