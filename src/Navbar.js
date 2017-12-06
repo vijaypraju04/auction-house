@@ -11,23 +11,17 @@ const Navbar = props => {
       <Link to="/" className="item">
         <h2 className="ui header">
           <i className={`${props.icon} icon`} />
-          <div className="content">{props.title}</div>
+          <div className="content">Auctioneer, Mediocrity incarnate!</div>
           <div className="sub header">{props.description}</div>
         </h2>
       </Link>
       <div className="right menu">
-        <Link to="/paintings" className="item">
-          index
-        </Link>
-        <Link to="/paintings/new" className="item">
-          new
-        </Link>
         {loggedIn ? (
           <a> className="item">Welcome {currentUser.username}</a>
         ) : null}
         {loggedIn ? (
           <a className="item">
-            <div
+            <button
               onClick={() => {
                 props.handleLogout();
                 props.history.push('/login');
@@ -35,7 +29,7 @@ const Navbar = props => {
               className="ui primary button"
             >
               Sign Out
-            </div>
+            </button>
           </a>
         ) : (
           <Link to="/login" className="item">

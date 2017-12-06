@@ -58,7 +58,8 @@ login = data => {
       username: data.username,
       user_id: data.id
 
-    }});
+    },
+        isLoggedIn: true});
   };
 
   logout = () => {
@@ -179,6 +180,7 @@ handleCreateBid = (bidInfo, auctionId) => {
             icon="paint brush"
             currentUser={this.state.auth}
             handleLogout={this.logout}
+            loggedIn={this.state.isLoggedIn}
           />
       <Route
               exact

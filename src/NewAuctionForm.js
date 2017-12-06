@@ -3,7 +3,7 @@ import React from 'react';
 class NewAuctionForm extends React.Component {
   constructor(props){
     super(props);
-    console.log(this.props.currentUser.user.id)
+    // console.log(this.props)
 
   this.state = {
     title: '',
@@ -17,6 +17,7 @@ class NewAuctionForm extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   };
   componentDidMount = () => {
+    console.log(this.props)
     this.setState({
       creator_id: this.props.currentUser.user.id
     })

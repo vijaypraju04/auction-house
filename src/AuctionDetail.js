@@ -11,7 +11,9 @@ const AuctionDetail = ({auction, onSubmit, handleCreateBid}) => {
     <div>
     <div>
       <h1>{auction.title}</h1>
+      <img src={auction.item} alt="" />
       <p>{auction.description}</p>
+
 
       <div>
         <NewBidForm
