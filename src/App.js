@@ -12,6 +12,7 @@ import NewBidForm from './NewBidForm.js'
 import Login from './login.js'
 import Auth from './Auth.js';
 import Navbar from './Navbar.js'
+import { withRouter } from 'react-router-dom'
 
 
 class App extends Component {
@@ -179,54 +180,85 @@ handleCreateBid = (bidInfo, auctionId, userId) => {
 
 
   render() {
+    console.log("APP", this.props)
     if(this.state.auctions.length < 1){
       return <div> LOADING </div>
     }
     return (
       <div>
 
-      <Navbar
-            color="green"
-            title="Painterest"
-            description="our app"
-            icon="paint brush"
-            currentUser={this.state.auth}
-            handleLogout={this.logout}
-            loggedIn={this.state.isLoggedIn}
-            handleLogin={this.login}
-            fetchUser={this.fetchUser}
-          />
-      <Route
-              exact path="/login"
-              render={props => <Login {...props}
-              handleLogin={this.login}
-              fetchUser={this.fetchUser}
-              />}
-            />
+      <Route path="/" component={Header} />
 
-        <Header />
-        <AuctionSearchBar
-        searchTerm={this.state.searchTerm}
-        handleSearchTerm={searchTerm => this.setState({searchTerm})}
-        />
-        {this.state.searchTerm}
-        <AuctionList
-          auctions={this.filterResults()}
-          onAuctionSelect={selectedAuction => this.setState({selectedAuction})}
-          />
-        <AuctionDetail
-          auction={this.state.selectedAuction}
-          handleCreateBid={this.handleCreateBid}
-          grabAuctionId={this.grabAuctionId}
-          currentUser={this.state.auth}
-          userList={this.state.users}
-          />
-        <NewAuctionForm
+    {/* this means header is everywhere */}
+
+      <Route
+        exact path="/login"
+        render={(props) => {
+          return (<Login {...props} handleLogin={this.login} fetchUser={this.fetchUser} />)
+          }
+        }
+      />
+
+      <Route path="/home" render={ () => {
+          return (<div>
+            <Navbar
+                  color="green"
+                  title="Painterest"
+                  description="our app"
+                  icon="paint brush"
+                  currentUser={this.state.auth}
+                  handleLogout={this.logout}
+                  loggedIn={this.state.isLoggedIn}
+                  handleLogin={this.login}
+                  fetchUser={this.fetchUser}
+                />
+              <AuctionSearchBar
+              searchTerm={this.state.searchTerm}
+              handleSearchTerm={searchTerm => this.setState({searchTerm})}
+              />
+              {this.state.searchTerm}
+              <AuctionList
+                auctions={this.filterResults()}
+                onAuctionSelect={selectedAuction => this.setState({selectedAuction})}
+                />
+          </div>)
+        }
+      }
+    />
+    <Route
+      path ="/auction/new"
+      render={(props) => {
+        return(<NewAuctionForm {...props}
           handleCreateAuction={this.handleCreateAuction}
-          currentUser={this.state.auth}/>
+          currentUser={this.state.auth}
+        />
+      )
+    }}
+  />
+
+    <Route path="/auction/:id" render={({match}) => {
+      console.log(match)
+      const auctionObj = this.state.auctions.find(auction => {
+        return auction.id == match.params.id
+      })
+
+      console.log(this.state.auctions)
+      console.log(auctionObj)
+
+      return (
+          <AuctionDetail
+            auction={auctionObj}
+            handleCreateBid={this.handleCreateBid}
+            grabAuctionId={this.grabAuctionId}
+            currentUser={this.state.auth}
+            userList={this.state.users}
+          />
+        )
+      }
+    } />
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);

@@ -5,6 +5,7 @@ import NewBidForm from './NewBidForm.js'
 import Clock from './Clock.js'
 
 const AuctionDetail = ({auction, onSubmit, handleCreateBid, currentUser, userList}) => {
+  console.log("AUCTION", auction)
   if(!auction) {
     return <div><h1>Please Log In and Select an Auction in order to Proceed</h1></div>;
   }

@@ -29,6 +29,7 @@ class NewAuctionForm extends React.Component {
   //   console.log(this.value)
   // }
 render() {
+  console.log(this.props)
   return (
     <form
       onSubmit={e => {e.preventDefault();

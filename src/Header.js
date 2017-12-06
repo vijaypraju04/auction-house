@@ -5,6 +5,7 @@ import Login from './login.js';
 import { Link, withRouter } from 'react-router-dom';
 
 const Header = props => {
+  console.log("HEADER PROPS", props.match.params)
   return (
     <div className="App">
       <header className="App-header" color="green">

@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 
 const Navbar = props => {
   console.log("navbar props", props)
-  console.log(loggedIn)
+  
   const token = localStorage.getItem('token');
 
   const currentUser = props.currentUser;

@@ -2,8 +2,8 @@ import React from 'react';
 import Auth from './Auth.js';
 
 class Login extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       error: false,
       fields: {
@@ -14,7 +14,7 @@ class Login extends React.Component {
   }
 
   componentDidMount = () => {
-    console.log(this.props);
+    console.log("LOGIN PROPS",this.props);
   }
 
   handleChange = (e) => {
@@ -29,7 +29,7 @@ class Login extends React.Component {
       if (!res.error) {
         const updatedState = { ...this.state.auth, user: res };
         this.props.handleLogin(res);
-        this.props.history.push('/');
+        this.props.history.push('/home');
       } else {
         this.setState({ error: true });
       }
