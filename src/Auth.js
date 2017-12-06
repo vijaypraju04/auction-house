@@ -16,6 +16,7 @@ export default class Auth {
   }
 
 
+
 // static getCurrentUser = () => {
 //   return fetch(`${baseUrl}/current_user`, {
 //     headers: {

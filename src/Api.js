@@ -27,6 +27,12 @@ const getCurrentUser = () => {
   }).then(res => res.json());
 };
 
+const getUsers = () => {
+  return fetch(`${API_ROOT}/users`, {
+    headers,
+  }).then(res => res.json());
+}
+
 export const api = {
   auth: {
     login,

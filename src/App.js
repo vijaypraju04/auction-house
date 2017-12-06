@@ -26,6 +26,7 @@ constructor(){
     selectedAuction: null,
     newAuction: {},
     isLoggedIn: false,
+    users: [],
     auth: {
       user: {}
       }
@@ -35,6 +36,7 @@ constructor(){
 
 componentDidMount(){
   this.fetchAuctions()
+  this.getUsers()
   const token = localStorage.getItem('token');
     if (token) {
 
@@ -47,6 +49,20 @@ componentDidMount(){
 
       });
     }
+  }
+
+  getUsers = () => {
+    fetch('http://localhost:3000//api/v1/users')
+      .then(res => res.json())
+      .then(res => {
+        const users = res;
+        this.setState({
+          users: res
+
+        });
+        console.log(users);
+      });
+      console.log(this.state);
   }
 
 login = data => {
@@ -203,6 +219,7 @@ handleCreateBid = (bidInfo, auctionId, userId) => {
           handleCreateBid={this.handleCreateBid}
           grabAuctionId={this.grabAuctionId}
           currentUser={this.state.auth}
+          userList={this.state.users}
           />
         <NewAuctionForm
           handleCreateAuction={this.handleCreateAuction}

@@ -4,7 +4,7 @@ import NewAuctionForm from './NewAuctionForm.js';
 import NewBidForm from './NewBidForm.js'
 import Clock from './Clock.js'
 
-const AuctionDetail = ({auction, onSubmit, handleCreateBid, currentUser}) => {
+const AuctionDetail = ({auction, onSubmit, handleCreateBid, currentUser, userList}) => {
   if(!auction) {
     return <div><h1>Please Log In and Select an Auction in order to Proceed</h1></div>;
   }
@@ -31,7 +31,9 @@ const AuctionDetail = ({auction, onSubmit, handleCreateBid, currentUser}) => {
 
     </div>
     <BidWindow
-      bids={auction.bids}/>
+      bids={auction.bids}
+      users={userList}
+    />
     </div>
   )
 }
