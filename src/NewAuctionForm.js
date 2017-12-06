@@ -10,7 +10,8 @@ class NewAuctionForm extends React.Component {
     item: '',
     description: '',
     value: '',
-    creator_id: ''
+    creator_id: '',
+    end_date: ''
   };
 }
   handleChange = e => {
@@ -63,6 +64,13 @@ render() {
         placeholder='Item Value'
         value={this.state.value}
         name="value"
+        onChange={this.handleChange}
+        />
+      <input
+        type='text'
+        placeholder='Auction End Date'
+        value={this.state.end_date}
+        name="end_date"
         onChange={this.handleChange}
         />
       <button

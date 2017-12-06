@@ -62,13 +62,7 @@ class Clock extends React.Component {
       <div className="Clock-seconds">{this.state.seconds} Seconds </div>
     </div>
     <div>
-      <input
-        placeholder="new date"
-        onChange={event => this.setState({newDeadline: event.target.value})}
-      />
-      <button onClick={() => this.changeDeadline()}>
-        Submit
-      </button>
+
     </div>
   </div>
   )
