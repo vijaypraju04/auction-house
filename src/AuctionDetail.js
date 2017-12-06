@@ -13,6 +13,7 @@ const AuctionDetail = ({auction, onSubmit, handleCreateBid, currentUser}) => {
     <div>
     <div>
       <h1>{auction.title}</h1>
+      <img src={auction.item} alt="" />
       <p>{auction.description}</p>
       <div>
         <Clock />

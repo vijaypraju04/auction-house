@@ -7,7 +7,7 @@ import { Link, withRouter } from 'react-router-dom';
 const Header = props => {
   return (
     <div className="App">
-      <header className="App-header" color="blue">
+      <header className="App-header" color="green">
         <img src={logo} className="App-logo" alt="logo" />
         <h1 className="App-title">
           Welcome to Auctioneer
