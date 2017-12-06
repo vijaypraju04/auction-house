@@ -16,12 +16,12 @@ class NewBidForm extends React.Component {
   }
 
   render() {
-    console.log(this.props.currentUser)
+    console.log(this.props.currentUserID)
     return (
       <form
         onSubmit={event => {event.preventDefault();
         console.log('bid placed');
-        this.props.handleCreateBid(this.state.currentBid, this.props.auctionId, this.props.currentUser);
+        this.props.handleCreateBid(this.state.currentBid, this.props.auctionId, this.props.currentUserID);
       }}
         >
       <input

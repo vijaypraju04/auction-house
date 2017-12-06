@@ -7,7 +7,7 @@ import {Route} from 'react-router-dom';
 const AuctionList = (props) => {
   const auctionListItems = props.auctions.map((auction) => {
     return (
-      console.log(auction),
+      // console.log(auction),
       // <Route
       //         path='/auctions/`${auction.id}`'
       //         render={props =>

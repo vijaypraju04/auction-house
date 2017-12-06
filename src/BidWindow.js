@@ -1,16 +1,20 @@
 import React from 'react';
+import Bid from './Bid.js'
 
-const BidWindow = ({bids}) => {
-  const bidList = bids.map((bid) => {
+const BidWindow = (props) => {
+  const bidList = props.bids.map((bid) => {
     return(
-    <li>
-      {bid.amount}
-      </li>
+      <Bid
+        key={bid.id}
+        bid={bid}
+        currentUser={props.currentUser}
+      />
     )
   })
   return (
+    console.log(props),
     <div className='Bid-Window'>
-      Recent Bids
+      Bids go Here
       {bidList}
     </div>
   )

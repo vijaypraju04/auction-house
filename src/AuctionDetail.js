@@ -24,7 +24,8 @@ const AuctionDetail = ({auction, onSubmit, handleCreateBid, currentUser}) => {
         <NewBidForm
           handleCreateBid={handleCreateBid}
           auctionId={auction.id}
-          currentUser={currentUser.user.id}
+          currentUserID={currentUser.user.id}
+          currentUser={currentUser.user}
         />
       </div>
 
