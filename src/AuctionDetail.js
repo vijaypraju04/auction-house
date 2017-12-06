@@ -2,6 +2,7 @@ import React from 'react';
 import BidWindow from './BidWindow.js'
 import NewAuctionForm from './NewAuctionForm.js';
 import NewBidForm from './NewBidForm.js'
+import Clock from './Clock.js'
 
 const AuctionDetail = ({auction, onSubmit, handleCreateBid, currentUser}) => {
   if(!auction) {
@@ -13,7 +14,9 @@ const AuctionDetail = ({auction, onSubmit, handleCreateBid, currentUser}) => {
     <div>
       <h1>{auction.title}</h1>
       <p>{auction.description}</p>
-
+      <div>
+        <Clock />
+      </div>
       <div>
         <NewBidForm
           handleCreateBid={handleCreateBid}
