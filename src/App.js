@@ -13,7 +13,6 @@ import Login from './login.js'
 import Auth from './Auth.js';
 import Navbar from './Navbar.js'
 import { withRouter } from 'react-router-dom'
-import NewUserForm from './NewUserForm.js'
 
 
 class App extends Component {
@@ -27,7 +26,6 @@ constructor(){
     searchTerm: '',
     selectedAuction: null,
     newAuction: {},
-    newUser: {},
     isLoggedIn: false,
     users: [],
     auth: {
@@ -142,27 +140,12 @@ filterResults = () => {
       },
     body: JSON.stringify(data)
   })
-  .catch(res => res.json())
-  .then(res => console.log(res));
-}
   // .catch(res => res.json());
-
-
-createUser = data => {
- fetch(`http://localhost:3000/api/v1/users`, {
-   method: 'POST',
-   headers: {
-      Accepts: 'application/json, text/plain',
-
-               'Content-Type': 'application/json'
-     },
-   body: JSON.stringify(data)
- })
- .catch(res => res.json())
- .then(res => console.log(res));
 }
 
 postBid = (data, auctionId, userId) => {
+  console.log(auctionId)
+  console.log(userId)
   fetch(`http://localhost:3000//api/v1/bids`, {
     method: 'POST',
     headers: {
@@ -184,14 +167,6 @@ postBid = (data, auctionId, userId) => {
 handleCreateAuction = auctionInfo => {
  console.log(auctionInfo);
  this.createAuction(auctionInfo)
- // .then(res => {
- //   console.log('res', res);
- // });
-};
-
-handleCreateUser = userInfo => {
- console.log('user info', userInfo);
- this.createUser(userInfo)
  // .then(res => {
  //   console.log('res', res);
  // });
@@ -246,41 +221,29 @@ handleCreateBid = (bidInfo, auctionId, userId) => {
                 auctions={this.filterResults()}
                 onAuctionSelect={selectedAuction => this.setState({selectedAuction})}
                 />
-          </div>)
+              <AuctionDetail
+                auction={this.state.selectedAuction}
+                handleCreateBid={this.handleCreateBid}
+                grabAuctionId={this.grabAuctionId}
+                currentUser={this.state.auth}
+                userList={this.state.users}
+                />
+          </div>
+        )
         }
       }
     />
-    <Route
-      path ="/auction/new"
-      render={(props) => {
-        return(<NewAuctionForm {...props}
-          handleCreateAuction={this.handleCreateAuction}
-          currentUser={this.state.auth}
-        />
-      )
-    }}
-  />
 
-    <Route path="/auction/:id" render={({match}) => {
-      console.log(match)
-      const auctionObj = this.state.auctions.find(auction => {
-        return auction.id == match.params.id
-      })
-
-      console.log(this.state.auctions)
-      console.log(auctionObj)
-
-      return (
-          <AuctionDetail
-            auction={auctionObj}
-            handleCreateBid={this.handleCreateBid}
-            grabAuctionId={this.grabAuctionId}
-            currentUser={this.state.auth}
-            userList={this.state.users}
-          />
-        )
-      }
-    } />
+<Route
+  path ="/auction/new"
+  render={(props) => {
+    return(<NewAuctionForm {...props}
+      handleCreateAuction={this.handleCreateAuction}
+      currentUser={this.state.auth}
+     />
+    )
+  }}
+/>
       </div>
     );
   }
