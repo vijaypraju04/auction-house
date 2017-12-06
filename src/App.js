@@ -37,30 +37,24 @@ componentDidMount(){
   this.fetchAuctions()
   const token = localStorage.getItem('token');
     if (token) {
-      console.log('there is a token');
+
       // make a request to the backend and find our user
       Auth.currentUser()
       .then(user => {
         // debugger
         const updatedState = { ...this.state.auth, user: user };
         this.setState({ isLoggedIn: true, auth: updatedState });
-        console.log(this.state)
+
       });
     }
   }
 
 login = data => {
-    console.log('hi')
-    const updatedState = this.setState({ auth:{user: data}});
-    console.log(data);
+    this.setState({
+      isLoggedIn: true,
+      auth:{user: data}
+    });
     localStorage.setItem('token', data.jwt);
-    console.log(this.state);
-    this.setState({ auth: {
-      username: data.username,
-      user_id: data.id
-
-    },
-        isLoggedIn: true});
   };
 
   logout = () => {
