@@ -1,8 +1,9 @@
 import React from "react"
 
 class NewBidForm extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
+
 
     this.state = {
       currentBid: ''
@@ -15,13 +16,12 @@ class NewBidForm extends React.Component {
   }
 
   render() {
-    // console.log(this.props)
+    console.log(this.props.currentUser)
     return (
-
       <form
         onSubmit={event => {event.preventDefault();
         console.log('bid placed');
-        this.props.handleCreateBid(this.state.currentBid, this.props.auctionId);
+        this.props.handleCreateBid(this.state.currentBid, this.props.auctionId, this.props.currentUser);
       }}
         >
       <input

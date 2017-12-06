@@ -131,8 +131,9 @@ filterResults = () => {
   // .catch(res => res.json());
 }
 
-postBid = (data, auctionId) => {
+postBid = (data, auctionId, userId) => {
   console.log(auctionId)
+  console.log(userId)
   fetch(`http://localhost:3000//api/v1/bids`, {
     method: 'POST',
     headers: {
@@ -142,7 +143,7 @@ postBid = (data, auctionId) => {
     body: JSON.stringify(
       {
       amount: data,
-      user_id: 3,
+      user_id: userId,
       auction_id: auctionId
   }
     )
@@ -159,8 +160,8 @@ handleCreateAuction = auctionInfo => {
  // });
 };
 
-handleCreateBid = (bidInfo, auctionId) => {
-  this.postBid(bidInfo, auctionId);
+handleCreateBid = (bidInfo, auctionId, userId) => {
+  this.postBid(bidInfo, auctionId, userId);
 
 }
 
@@ -183,8 +184,7 @@ handleCreateBid = (bidInfo, auctionId) => {
             loggedIn={this.state.isLoggedIn}
           />
       <Route
-              exact
-              path="/login"
+              exact path="/login"
               render={props => <Login {...props}
               handleLogin={this.login}
               fetchUser={this.fetchUser}/>}
@@ -205,6 +205,7 @@ handleCreateBid = (bidInfo, auctionId) => {
           auction={this.state.selectedAuction}
           handleCreateBid={this.handleCreateBid}
           grabAuctionId={this.grabAuctionId}
+          currentUser={this.state.auth}
           />
         <NewAuctionForm
           handleCreateAuction={this.handleCreateAuction}

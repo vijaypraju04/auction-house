@@ -3,10 +3,11 @@ import BidWindow from './BidWindow.js'
 import NewAuctionForm from './NewAuctionForm.js';
 import NewBidForm from './NewBidForm.js'
 
-const AuctionDetail = ({auction, onSubmit, handleCreateBid}) => {
+const AuctionDetail = ({auction, onSubmit, handleCreateBid, currentUser}) => {
   if(!auction) {
     return <div><h1>Please Log In and Select an Auction in order to Proceed</h1></div>;
   }
+
   return(
     <div>
     <div>
@@ -19,6 +20,7 @@ const AuctionDetail = ({auction, onSubmit, handleCreateBid}) => {
         <NewBidForm
           handleCreateBid={handleCreateBid}
           auctionId={auction.id}
+          currentUser={currentUser.user.id}
         />
       </div>
 
