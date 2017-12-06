@@ -16,7 +16,9 @@ const AuctionDetail = ({auction, onSubmit, handleCreateBid, currentUser}) => {
       <img src={auction.item} alt="" />
       <p>{auction.description}</p>
       <div>
-        <Clock />
+        <Clock
+          auctionEnd={auction.end_date}
+        />
       </div>
       <div>
         <NewBidForm

@@ -1,10 +1,14 @@
 import React from 'react'
+import {Link} from 'react-router-dom';
 
-const Auctions = ({auction, onAuctionSelect}) => {
+const Auctions = (props) => {
   return (
-    <div onClick={() => onAuctionSelect(auction)}>
-        {auction.title}
+
+    <Link to='/auctions/`${auction.id}`'>
+    <div onClick={() => props.onAuctionSelect(props.auction)}>
+        {props.auction.title}
         </div>
+    </Link>
   )
 }
 

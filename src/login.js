@@ -13,6 +13,9 @@ class Login extends React.Component {
     };
   }
 
+  componentDidMount = () => {
+    console.log(this.props);
+  }
 
   handleChange = (e) => {
     const newFields = { ...this.state.fields, [e.target.name]: e.target.value };

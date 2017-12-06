@@ -2,11 +2,14 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 
 const Navbar = props => {
-
+  const token = localStorage.getItem('token');
+  
   const currentUser = props.currentUser;
-  const loggedIn = !!props.id;
+  const loggedIn = props.loggedIn;
   return (
     console.log(props),
+    console.log(token),
+    console.log(loggedIn),
     <div className={`ui top fixed inverted ${props.color} menu`}>
       <Link to="/" className="item">
         <h2 className="ui header">
@@ -17,7 +20,7 @@ const Navbar = props => {
       </Link>
       <div className="right menu">
         {loggedIn ? (
-          <a> className="item">Welcome {currentUser.username}</a>
+          <a>Welcome {currentUser.user.username}</a>
         ) : null}
         {loggedIn ? (
           <a className="item">

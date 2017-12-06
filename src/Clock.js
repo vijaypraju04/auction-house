@@ -9,13 +9,18 @@ class Clock extends React.Component {
       hours: 0,
       minutes: 0,
       seconds: 0,
-      deadline: "December 25, 2017",
+      deadline: "",
       newDeadline: ''
     }
   }
 
   componentWillMount() {
+    this.setState({ deadline: this.props.auctionEnd})
+    console.log(this.props.auctionEnd)
     this.getTimeUntil(this.state.deadline)
+  }
+  componentWillReceiveProps(){
+    this.setState({ deadline: this.props.auctionEnd})
   }
 
   componentDidMount() {
@@ -24,7 +29,7 @@ class Clock extends React.Component {
 
   getTimeUntil(deadline) {
     const time = Date.parse(deadline) - Date.parse(new Date());
-    console.log("time", time)
+    // console.log("time", time)
     const seconds = Math.floor((time/1000)%60);
     const minutes = Math.floor ((time/1000/60)%60);
     const hours = Math.floor (time/(1000*60)%24);

@@ -44,6 +44,7 @@ componentDidMount(){
         // debugger
         const updatedState = { ...this.state.auth, user: user };
         this.setState({ isLoggedIn: true, auth: updatedState });
+        console.log(this.state)
       });
     }
   }
@@ -64,7 +65,7 @@ login = data => {
 
   logout = () => {
       localStorage.removeItem('token');
-      this.setState({ auth: { user: {} } });
+      this.setState({ isLoggedIn: false, auth: { user: {} } });
     };
 
 fetchAuctions = () => {
@@ -182,12 +183,15 @@ handleCreateBid = (bidInfo, auctionId, userId) => {
             currentUser={this.state.auth}
             handleLogout={this.logout}
             loggedIn={this.state.isLoggedIn}
+            handleLogin={this.login}
+            fetchUser={this.fetchUser}
           />
       <Route
               exact path="/login"
               render={props => <Login {...props}
               handleLogin={this.login}
-              fetchUser={this.fetchUser}/>}
+              fetchUser={this.fetchUser}
+              />}
             />
 
         <Header />
@@ -196,7 +200,6 @@ handleCreateBid = (bidInfo, auctionId, userId) => {
         handleSearchTerm={searchTerm => this.setState({searchTerm})}
         />
         {this.state.searchTerm}
-
         <AuctionList
           auctions={this.filterResults()}
           onAuctionSelect={selectedAuction => this.setState({selectedAuction})}

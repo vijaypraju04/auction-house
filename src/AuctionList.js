@@ -2,10 +2,22 @@ import React from 'react';
 import './App.css';
 import AuctionSearchBar from './AuctionSearchBar.js';
 import Auctions from './Auctions.js';
+import {Route} from 'react-router-dom';
 
 const AuctionList = (props) => {
   const auctionListItems = props.auctions.map((auction) => {
     return (
+      console.log(auction),
+      // <Route
+      //         path='/auctions/`${auction.id}`'
+      //         render={props =>
+      //         <Auctions {...props}
+      //         onAuctionSelect={props.onAuctionSelect}
+      //         key={auction.id}
+      //         auction={auction}
+      //         />}
+      //       />
+
       <Auctions
         onAuctionSelect={props.onAuctionSelect}
         key={auction.id}
@@ -16,7 +28,7 @@ const AuctionList = (props) => {
   return (
     <div className='Auction-Listing'>
       <h4>
-        List of Auction
+        List of Auctions
         {auctionListItems}
       </h4>
     </div>
