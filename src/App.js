@@ -276,9 +276,14 @@ handleCreateBid = (bidInfo, auctionId, userId) => {
      />
     )
   }}
+
 />
-<Logout
-  logUserOut={this.logout}
+<Route
+  path="/log_out"
+  render={(props) => {
+    return (<Logout {...props} logUserOut={this.logout} />)
+    }
+}
 />
       </div>
     );
