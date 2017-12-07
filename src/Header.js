@@ -9,10 +9,17 @@ const Header = props => {
   return (
     <div className="App">
       <header className="App-header" color="green">
+      <img src={logo} className="App-logo" alt="logo" />
         <Link to="/login" className="item">
               <div className="ui primary button">Sign In</div>
             </Link>
-        <img src={logo} className="App-logo" alt="logo" />
+        <Link to="/users/new" className="item">
+              <div className="ui primary button">Register</div>
+            </Link>
+       <Link to="/auction/new" className="item">
+            <div className="ui primary button">List a New Auction</div>
+       </Link  >
+
         <h1 className="App-title">
           Welcome to Auctioneer
         </h1>

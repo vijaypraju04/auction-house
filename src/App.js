@@ -14,10 +14,12 @@ import Auth from './Auth.js';
 import Navbar from './Navbar.js'
 import { withRouter } from 'react-router-dom'
 import { Grid, Segment } from 'semantic-ui-react'
+import NewUserForm from './NewUserForm.js'
+import Logout from './Logout.js'
 
 
 class App extends Component {
-// const API_LINK = 'http://localhost:3000//api/v1/auctions'
+// const API_LINK = 'https://auction-back-end.herokuapp.com/api/v1/auctions'
 
 constructor(){
   super()
@@ -27,6 +29,7 @@ constructor(){
     searchTerm: '',
     selectedAuction: null,
     newAuction: {},
+    newUser: {},
     isLoggedIn: false,
     users: [],
     auth: {
@@ -54,7 +57,7 @@ componentDidMount(){
   }
 
   getUsers = () => {
-    fetch('http://localhost:3000//api/v1/users')
+    fetch('https://auction-back-end.herokuapp.com/api/v1/users')
       .then(res => res.json())
       .then(res => {
         const users = res;
@@ -81,7 +84,7 @@ login = data => {
     };
 
 fetchAuctions = () => {
-    fetch('http://localhost:3000//api/v1/auctions')
+    fetch('https://auction-back-end.herokuapp.com/api/v1/auctions')
     .then(res => res.json())
     .then(res => {
       const auctions = res;
@@ -96,7 +99,7 @@ fetchAuctions = () => {
 
 fetchUser = (userData) => {
   console.log("fetch user", userData)
-  fetch('http://localhost:3000//api/v1/login', {
+  fetch('https://auction-back-end.herokuapp.com/api/v1/login', {
     method: 'POST',
     headers: {
        Accepts: 'application/json, text/plain',
@@ -110,7 +113,7 @@ fetchUser = (userData) => {
 }
 
 updateAuctions= () => {
-    fetch('http://localhost:3000//api/v1/auctions')
+    fetch('https://auction-back-end.herokuapp.com/api/v1/auctions')
     .then(res => res.json())
     .then(res => {
       const stateSelected = this.state.selectedAuction;
@@ -132,7 +135,7 @@ filterResults = () => {
     return newList
  }
  createAuction = data => {
-  fetch(`http://localhost:3000//api/v1/auctions`, {
+  fetch(`https://auction-back-end.herokuapp.com/api/v1/auctions`, {
     method: 'POST',
     headers: {
        Accepts: 'application/json, text/plain',
@@ -144,10 +147,23 @@ filterResults = () => {
   // .catch(res => res.json());
 }
 
+createUser = data => {
+ fetch(`https://auction-back-end.herokuapp.com/api/v1/users`, {
+   method: 'POST',
+   headers: {
+      Accepts: 'application/json, text/plain',
+
+               'Content-Type': 'application/json'
+     },
+   body: JSON.stringify(data)
+ })
+ // .catch(res => res.json());
+}
+
 postBid = (data, auctionId, userId) => {
   console.log(auctionId)
   console.log(userId)
-  fetch(`http://localhost:3000//api/v1/bids`, {
+  fetch(`https://auction-back-end.herokuapp.com/api/v1/bids`, {
     method: 'POST',
     headers: {
       Accepts: 'application/json, text/plain',
@@ -168,6 +184,14 @@ postBid = (data, auctionId, userId) => {
 handleCreateAuction = auctionInfo => {
  console.log(auctionInfo);
  this.createAuction(auctionInfo)
+ // .then(res => {
+ //   console.log('res', res);
+ // });
+};
+
+handleCreateUser = userInfo => {
+ console.log(userInfo);
+ this.createUser(userInfo)
  // .then(res => {
  //   console.log('res', res);
  // });
@@ -196,6 +220,13 @@ handleCreateBid = (bidInfo, auctionId, userId) => {
         exact path="/login"
         render={(props) => {
           return (<Login {...props} handleLogin={this.login} fetchUser={this.fetchUser} />)
+          }
+        }
+      />
+      <Route
+        exact path="/users/new"
+        render={(props) => {
+          return (<NewUserForm {...props} handleCreateUser={this.handleCreateUser} />)
           }
         }
       />
@@ -245,6 +276,9 @@ handleCreateBid = (bidInfo, auctionId, userId) => {
      />
     )
   }}
+/>
+<Logout
+  logUserOut={this.logout}
 />
       </div>
     );
