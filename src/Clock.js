@@ -1,5 +1,6 @@
 import React from 'react'
 import './App.css'
+import { Icon, Header, Segment } from 'semantic-ui-react'
 
 class Clock extends React.Component {
   constructor(props) {
@@ -27,6 +28,10 @@ class Clock extends React.Component {
     setInterval(() => this.getTimeUntil(this.state.deadline), 100)
   }
 
+  leading0(num) {
+    return num < 10 ? "0" + num : num
+  }
+
   getTimeUntil(deadline) {
     const time = Date.parse(deadline) - Date.parse(new Date());
     // console.log("time", time)
@@ -34,7 +39,6 @@ class Clock extends React.Component {
     const minutes = Math.floor ((time/1000/60)%60);
     const hours = Math.floor (time/(1000*60)%24);
     const days = Math.floor (time/(1000*60*60*24))
-
 
     this.setState({
       days,
@@ -53,16 +57,20 @@ class Clock extends React.Component {
     return (
     <div>
       <div>
-        Countdown to {this.state.deadline}
+              <Header as='h2' block textAlign='center'>
+        Auction End Date: {this.state.deadline}
+      </Header>
       </div>
     <div>
-      <div className="Clock-days">{this.state.days} Days </div>
-      <div className="Clock-hours">{this.state.hours} Hours </div>
-      <div className="Clock-minutes">{this.state.minutes} Minutes </div>
-      <div className="Clock-seconds">{this.state.seconds} Seconds </div>
-    </div>
-    <div>
-
+      <div>
+        <Header as="h3" block textAlign='center'>
+          <div>
+                  <Icon name='clock' size='large'/>
+                  Time Remaining
+                </div>
+        {this.leading0(this.state.days)} Days: {this.leading0(this.state.hours)} Hours {this.leading0(this.state.minutes)} Minutes {this.leading0(this.state.seconds)} Seconds
+      </Header>
+      </div>
     </div>
   </div>
   )

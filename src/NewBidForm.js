@@ -1,4 +1,5 @@
 import React from "react"
+import { Input, Label, Button } from 'semantic-ui-react'
 
 class NewBidForm extends React.Component {
   constructor(props) {
@@ -24,6 +25,8 @@ class NewBidForm extends React.Component {
         this.props.handleCreateBid(this.state.currentBid, this.props.auctionId, this.props.currentUserID);
       }}
         >
+  <Input labelPosition='right' type='text' placeholder='Amount'>
+    <Label basic>$</Label>
       <input
         type="text"
         placeholder="bid now"
@@ -31,9 +34,13 @@ class NewBidForm extends React.Component {
         name="bid now"
         onChange={this.handleChange}
       />
-      <button type="submit">
+      <Label>.00</Label>
+    </Input>
+    <span>
+      <Button type="submit">
         Place Bid
-      </button>
+      </Button>
+    </span>
     </form>
     )
   }

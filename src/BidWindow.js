@@ -1,5 +1,6 @@
 import React from 'react';
 import Bid from './Bid.js';
+import { List } from 'semantic-ui-react'
 
 const BidWindow = (props) => {
   const bidList = props.bids.map((bid) => {
@@ -13,11 +14,8 @@ const BidWindow = (props) => {
     )
   })
   return (
-    console.log(),
-    <div className='Bid-Window'>
-      Bids go Here
-      {bidList}
-    </div>
+    <List
+      items={bidList}/>
   )
 }
 

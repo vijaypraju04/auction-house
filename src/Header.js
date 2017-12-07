@@ -9,17 +9,14 @@ const Header = props => {
   return (
     <div className="App">
       <header className="App-header" color="green">
+        <Link to="/login" className="item">
+              <div className="ui primary button">Sign In</div>
+            </Link>
         <img src={logo} className="App-logo" alt="logo" />
         <h1 className="App-title">
           Welcome to Auctioneer
         </h1>
-          <h4 className='App-title'>
-            Where Mediocrity is our goal!
-          </h4>
       </header>
-      <Link to="/login" className="item">
-            <div className="ui primary button">Sign In</div>
-          </Link>
     </div>
   )
 }

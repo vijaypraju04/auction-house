@@ -3,15 +3,17 @@ import { Link, withRouter } from 'react-router-dom';
 
 const Navbar = props => {
   console.log("navbar props", props)
-  
+
   const token = localStorage.getItem('token');
 
   const currentUser = props.currentUser;
   const loggedIn = props.loggedIn;
 
   return (
+    <div>
+      <header>
     <div className={`ui top fixed inverted ${props.color} menu`}>
-      <Link to="/" className="item">
+      <Link to="/home" className="item">
         <h2 className="ui header">
           <i className={`${props.icon} icon`} />
           <div className="content">Auctioneer, Mediocrity incarnate!</div>
@@ -41,6 +43,8 @@ const Navbar = props => {
         )}
       </div>
     </div>
+  </header>
+</div>
   );
 };
 

@@ -13,6 +13,7 @@ import Login from './login.js'
 import Auth from './Auth.js';
 import Navbar from './Navbar.js'
 import { withRouter } from 'react-router-dom'
+import { Grid, Segment } from 'semantic-ui-react'
 
 
 class App extends Component {
@@ -200,27 +201,25 @@ handleCreateBid = (bidInfo, auctionId, userId) => {
       />
 
       <Route path="/home" render={ () => {
-          return (<div>
-            <Navbar
-                  color="green"
-                  title="Painterest"
-                  description="our app"
-                  icon="paint brush"
-                  currentUser={this.state.auth}
-                  handleLogout={this.logout}
-                  loggedIn={this.state.isLoggedIn}
-                  handleLogin={this.login}
-                  fetchUser={this.fetchUser}
-                />
+          return (
+            <div>
+              <Grid columns={2} divided>
+                <Grid.Row stretched>
+                  <Grid.Column width={3}>
+                    <Segment>
               <AuctionSearchBar
               searchTerm={this.state.searchTerm}
               handleSearchTerm={searchTerm => this.setState({searchTerm})}
               />
-              {this.state.searchTerm}
+            </Segment>
+              <Segment>
               <AuctionList
                 auctions={this.filterResults()}
                 onAuctionSelect={selectedAuction => this.setState({selectedAuction})}
                 />
+              </Segment>
+            </Grid.Column>
+            <Grid.Column width={13}>
               <AuctionDetail
                 auction={this.state.selectedAuction}
                 handleCreateBid={this.handleCreateBid}
@@ -228,6 +227,9 @@ handleCreateBid = (bidInfo, auctionId, userId) => {
                 currentUser={this.state.auth}
                 userList={this.state.users}
                 />
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
           </div>
         )
         }

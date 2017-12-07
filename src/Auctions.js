@@ -1,12 +1,15 @@
 import React from 'react'
 import {Link} from 'react-router-dom';
+import { Image, Button, Segment } from 'semantic-ui-react'
 
 const Auctions = (props) => {
   return (
 
-    <div onClick={() => props.onAuctionSelect(props.auction)}>
+    <Segment inverted>
         {props.auction.title}
-        </div>
+        <Image src={props.auction.item} size='small' />
+        <Button positive onClick={() => props.onAuctionSelect(props.auction)}> View Auction </Button>
+      </Segment>
   )
 }
 

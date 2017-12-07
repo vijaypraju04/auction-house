@@ -26,9 +26,10 @@ const AuctionList = (props) => {
     )
   });
   return (
-    <div className='Auction-Listing'>
+    <div>
       <h4>
-        List of Auctions
+        <h2>List of Auctions</h2>
+
         {auctionListItems}
       </h4>
     </div>
