@@ -26,6 +26,7 @@ const AuctionDetail = ({auction, onSubmit, handleCreateBid, currentUser, userLis
     </Header>
       <Image src={auction.item} size='large' centered />
       <Header as='h3' block textAlign='center' inverted color='blue'> {auction.description} </Header>
+        <Header as='h3' block textAlign='center' inverted color='blue'> ${auction.value}.00 </Header>
     </Segment>
     <Segment color='black' inverted>
       <div>
