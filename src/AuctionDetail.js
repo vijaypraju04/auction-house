@@ -20,7 +20,7 @@ const AuctionDetail = ({auction, onSubmit, handleCreateBid, currentUser, userLis
   return(
     <div>
     <div>
-      <Segment inverted color="teal">
+      <Segment inverted>
         <Header as="h3" block textAlign='center' inverted color='blue'>
       <h1>{auction.title}</h1>
     </Header>
